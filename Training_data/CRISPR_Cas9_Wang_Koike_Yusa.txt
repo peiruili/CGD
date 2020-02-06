@@ -1,4 +1,4 @@
-Sequence (4bp + 20bp protospacer + PAM + 3bp) 	Efficiency_predictor
+Sequence (4nt + 20nt protospacer + PAM + 3nt) 	Efficiency_predictor
 AAGTTGAAGGCTACAAGAAGACCAAGGAAG	-4.829006408
 CATCGTGGCTAAACAGGTACTGCTGGGTAA	-4.813080787
 CTTGTGGTGAAGGTTCTAAGACGTGGGATC	-4.568440148
