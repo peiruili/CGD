@@ -316,14 +316,80 @@ def LINDELicalculatescore(seq):
                         score += wt
         return (1.0/(1.0 + math.exp(-score)))
 
+def LINDELNGcalculatescore(seq):
+	parameters = [('AA',7,-0.166151119),('AA',15,-0.116635449),('AA',16,-0.141978972),('AA',20,-0.46209483),('AA',21,-1.159033893),('AA',23,-0.14092585),('AA',28,-0.140710973),('TA',7,0.242102512),('TA',10,-0.051811653),('TA',16,0.462935638),('TA',17,0.587570687),
+('TA',21,-0.321626833),('TA',22,0.221199793),('TA',26,-0.308936349),('TA',27,0.228218948),('GA',0,-0.213575878),('GA',6,0.155415387),('GA',11,-0.066555092),('GA',12,0.155827764),('GA',13,0.191500133),('GA',14,0.105536077),('GA',15,0.104278628),
+('GA',17,-0.134284261),('GA',18,0.144061168),('GA',25,0.111163684),('CA',2,0.038959214),('CA',7,0.126214472),('CA',8,-0.150300426),('CA',17,0.297525515),('CA',19,0.25467499),('CA',20,-0.293330178),('CA',22,0.238690067),('CA',23,-0.21982359),('CA',27,2.054117089),('CA',28,0.335055713),('AT',1,-0.097386892),('AT',2,0.123999347),('AT',8,0.081022603),('AT',10,-0.108078392),('AT',12,-0.079018399),('AT',18,-0.174383894),('AT',19,0.320177513),('TT',6,-0.221409382),('TT',7,-0.157901062),('TT',8,-0.061772525),('TT',10,-0.150198902),('TT',11,-0.448551556),('TT',12,-0.622624981),('TT',13,-0.139416659),('TT',14,-0.077523842),('TT',15,-0.948417398),('TT',16,-0.080861838),('TT',17,-1.046258319),('TT',18,-0.375026297),('TT',20,-1.119104273),('TT',21,-0.166128832),('TT',22,-0.930378086),('GT',21,0.510522765),('GT',22,0.332401486),('GT',23,0.219019899),('GT',25,-0.154193855),('CT',10,0.202473712),('CT',14,-0.158357686),('CT',15,-0.066814565),('CT',16,0.160473088),('CT',22,-0.552932155),('AG',13,0.160018261),('AG',19,-0.108198604),('AG',20,0.144071434),('AG',22,0.25226124),('AG',23,1.063887668),('AG',24,-0.009612897),('AG',28,0.122018273),('TG',5,0.241363252),('TG',9,0.079465841),('TG',10,0.149806008),('TG',12,0.049946857),('TG',13,0.155486915),('TG',14,0.031926277),('TG',18,-0.277324377),('TG',20,0.691550937),('TG',26,-0.08254848),('GG',1,-0.157621236),('GG',6,0.278519061),('GG',9,0.259115271),('GG',23,2.055614334),('CG',2,-0.436407352),('CG',7,-0.046536109),('CG',16,-0.15453076),('CG',17,-0.205884833),('CG',18,0.191552793),('CG',20,-0.245249633),
+('CG',21,-0.542330163),('CG',27,-0.185411057),('AC',0,-0.085648062),('AC',6,0.148699235),('AC',18,0.105302637),('AC',20,0.175012001),('AC',23,0.264370297),('AC',26,-0.184483722),('TC',0,0.112147888),('TC',11,0.217316946),('TC',13,-0.310569559),
+('TC',14,-0.121534773),('TC',21,-0.247459342),('TC',22,-1.241334903),('TC',23,-0.628940116),('TC',27,0.536660199),('TC',28,-0.093641005),('GC',1,0.276788432),('GC',4,-0.00869246),('GC',9,0.128560922),('GC',10,0.080325072),('GC',12,-0.219567722),
+('GC',18,-0.073212082),('GC',19,-0.210102633),('GC',20,-0.457465406),('GC',21,-0.17993102),('GC',22,-1.458409354),('CC',6,-0.110326586),('CC',9,-0.259044689),('CC',16,0.38220164),('CC',17,0.13474772),('CC',18,0.352748051),('CC',19,0.771334455),('CC',21,0.234536174),('CC',26,0.757158333),('CC',28,-0.136943015),('A',10,-0.04673173),('A',20,0.05239417),('A',24,-0.22018074),('A',26,3.09091971),('T',19,-0.36533529),('T',21,-0.35869458),('T',23,-0.35126663),('T',26,-0.8356666),('G',6,0.05688286),('G',17,-0.10189948),('G',20,-0.05641955),('G',23,0.22952347),('G',24,0.90850369),('G',29,0.07510093),('C',5,-0.11228712),('C',17,0.10768524),('C',18,0.05610607),('C',19,0.05474233),('C',20,-0.02714258),('C',21,0.13026953),('C',23,-0.27420231)]
+
+	intercept = -4.472148961
+	score = intercept
+	Entropy = 1.459539385
+	Free_energy = 0.17806217
+	GChigh = 0.012356139
+	GClow = -1.05E-13
+	AG = 0.09453565
+	TG = 0.034280035
+	TT = -0.179103124
+	
+	#### feature extraction 
+        ##Free_energy
+        Energy = seq[4:24]
+        Energycal = RNA.fold(Energy)[-1]
+        Energycal = round(Energycal,0)
+        score +=(Energycal*Free_energy)
+        # independent nucleotide composition
+        score = score + AG*(seq.count('AG'))
+        score = score + TT*(seq.count('TT'))
+        score = score + TG*(seq.count('TA'))
+	#entropy cal
+	entropy = dict()
+        Entropycal = []
+        entropy_seq = seq[4:24]
+        lentseq= len(entropy_seq)
+	ntscount = {'A':0, 'G':0, 'T':0, 'C':0}
+	nuc = ['A','T','G','C']
+        for ant in nuc:
+                ntscount[ant]=(entropy_seq.count(ant))/float((lentseq))
+        for ant in nuc:
+                if ntscount[ant]!=0:
+                        entropy[ant] = -(ntscount[ant]*np.log2(ntscount[ant]))
+                else:
+                        entropy[ant] = 0
+	entropySum = sum(entropy.values())
+	entropySumR = round(entropySum,1)
+	score += (entropySumR*Entropy)
+	
+	guideSeq = seq[4:24]
+        gcCount = guideSeq.count("G") + guideSeq.count("C")
+        if gcCount <= 10:
+                gcWeight = GClow
+        if gcCount > 10:
+                gcWeight = GChigh
+        score += abs(10-gcCount)*gcWeight
+
+	for bp, position, wt in parameters:
+                subSeq = seq[position:position+len(bp)]
+                if subSeq==bp:
+                        score += wt
+        return (1.0/(1.0 + math.exp(-score)))
+
 def Comprehensive(fastfile):
         cas9 = {}
 	cas9i = {}
 	cas9a = {}
+	cas9NGA = {}
+	cas9NGC = {}
+	cas9NGT = {}
 	cas12a = {}
 	ncas9 = {}
 	ncas9i = {}
 	ncas9a = {}
+	ncas9NGA = {}
+	ncas9NGC = {}
+	ncas9NGT = {}
 	ncas12a = {}
 	sara = {}
 	ast = []
@@ -338,7 +404,7 @@ def Comprehensive(fastfile):
 	file1 = open(fastfile,'r')
 	file1  = file1.readlines()
 	cas9f = open('CGD.txt','wb')
-	cas9f.write('ID' + '\t' + 'Start' + '\t' + 'End' + '\t' + 'Strand' + '\t' + 'Sequence' + '\t' + 'CGDi' + '\t' + 'CGDa' + '\t' + 'CGD9' + '\t' + 'Cas12a' + '\n')
+	cas9f.write('ID' + '\t' + 'Start' + '\t' + 'End' + '\t' + 'Strand' + '\t' + 'Sequence' + '\t' + 'CGDi' + '\t' + 'CGDa' + '\t' + 'CGD9' + '\t' + 'CGDNGR' + '\t' + 'CGD12a' +'\n')
 	for line in file1:
 		if line.startswith(">"):
 			newline = line.strip('\r\n')
@@ -371,11 +437,12 @@ def Comprehensive(fastfile):
 						score_LINDELa = round(LINDELacalculatescore(sequences),2)
 						score_LINDELi = round(LINDELicalculatescore(sequences),2)
 						score_LINDEL = round(LINDELcalculatescore(sequences),2)
-                                                cas9i[idi] = [nstart,nend,'+',sequences,float(score_LINDELi),float(score_LINDELa),float(score_LINDEL),float(0.0),str(IDs)]
+                                                cas9i[idi] = [nstart,nend,'+',sequences,float(score_LINDELi),float(score_LINDELa),float(score_LINDEL),float(0.0),float(0.0),str(IDs)]
                                                 
-                                                cas9a[ida] = [nstart,nend,'+',sequences,float(score_LINDELi),float(score_LINDELa),float(score_LINDEL),float(0.0),str(IDs)]
+                                                cas9a[ida] = [nstart,nend,'+',sequences,float(score_LINDELi),float(score_LINDELa),float(score_LINDEL),float(0.0),float(0.0),str(IDs)]
                                                
-                                                cas9[ids] = [nstart,nend,'+',sequences,float(score_LINDELi),float(score_LINDELa),float(score_LINDEL),float(0.0),str(IDs)]
+                                                cas9[ids] = [nstart,nend,'+',sequences,float(score_LINDELi),float(score_LINDELa),float(score_LINDEL),float(0.0),float(0.0),str(IDs)]
+			
 
 
 			for t in xrange(len(my_value)): 
@@ -397,12 +464,82 @@ def Comprehensive(fastfile):
                                         	score_LINDELi = round(LINDELicalculatescore(nsequences),2)
                                         	score_LINDEL = round(LINDELcalculatescore(nsequences),2)
 						
-						ncas9i[idii] = [nstart,nend,'-',nsequences,float(score_LINDELi),float(score_LINDELa),float(score_LINDEL),float(0.0),str(IDs)]
+						ncas9i[idii] = [nstart,nend,'-',nsequences,float(score_LINDELi),float(score_LINDELa),float(score_LINDEL),float(0.0),float(0.0),str(IDs)]
 						
-						ncas9a[idaa] = [nstart,nend,'-',nsequences,float(score_LINDELi),float(score_LINDELa),float(score_LINDEL),float(0.0),str(IDs)]
+						ncas9a[idaa] = [nstart,nend,'-',nsequences,float(score_LINDELi),float(score_LINDELa),float(score_LINDEL),float(0.0),float(0.0),str(IDs)]
 						
-						ncas9[idss] = [nstart,nend,'-',nsequences,float(score_LINDELi),float(score_LINDELa),float(score_LINDEL),float(0.0),str(IDs)]
-						
+						ncas9[idss] = [nstart,nend,'-',nsequences,float(score_LINDELi),float(score_LINDELa),float(score_LINDEL),float(0.0),float(0.0),str(IDs)]
+
+
+			for n in xrange(len(my_value)): 
+				st = my_value.find('GA',n)
+				if st == n:
+					if int(25) < int(st) < len(my_value)-int(5):
+						nstart = int(st) - int(25)
+						nend = int(st) + int(5)
+						sequences = my_value[nstart:nend]
+						idga = 'gRNAga_' + str(nstart)
+						score_LINDELNG = round(LINDELNGcalculatescore(sequences),2)
+                                                cas9NGA[idga] = [nstart,nend,'+',sequences,float(0.0),float(0.0),float(0.0),float(score_LINDELNG),float(0.0),str(IDs)]
+
+			for n in xrange(len(my_value)): 
+				st = my_value.find('CT',n)
+				if st == n:
+					if int(25) < int(st) < len(my_value)-int(5):
+						nstart = int(st) - int(25)
+						nend = int(st) + int(5)
+						sequences = my_value[nstart:nend]
+						idct = 'gRNAct_' + str(nstart)
+						score_LINDELNG = round(LINDELNGcalculatescore(sequences),2)
+                                                ncas9NGA[idct] = [nstart,nend,'-',sequences,float(0.0),float(0.0),float(0.0),float(score_LINDELNG),float(0.0),str(IDs)]
+		
+			
+
+			
+			for n in xrange(len(my_value)): 
+				st = my_value.find('GC',n)
+				if st == n:
+					if int(25) < int(st) < len(my_value)-int(5):
+						nstart = int(st) - int(25)
+						nend = int(st) + int(5)
+						sequences = my_value[nstart:nend]
+						idgc = 'gRNAgc_' + str(nstart)
+						score_LINDELNG = round(LINDELNGcalculatescore(sequences),2)
+                                                cas9NGC[idgc] = [nstart,nend,'+',sequences,float(0.0),float(0.0),float(0.0),float(score_LINDELNG),float(0.0),str(IDs)]
+
+			for n in xrange(len(my_value)): 
+				st = my_value.find('CG',n)
+				if st == n:
+					if int(25) < int(st) < len(my_value)-int(5):
+						nstart = int(st) - int(25)
+						nend = int(st) + int(5)
+						sequences = my_value[nstart:nend]
+						idcg = 'gRNAcg_' + str(nstart)
+						score_LINDELNG = round(LINDELNGcalculatescore(sequences),2)
+                                                ncas9NGC[idcg] = [nstart,nend,'-',sequences,float(0.0),float(0.0),float(0.0),float(score_LINDELNG),float(0.0),str(IDs)]
+
+			for n in xrange(len(my_value)): 
+				st = my_value.find('GT',n)
+				if st == n:
+					if int(25) < int(st) < len(my_value)-int(5):
+						nstart = int(st) - int(25)
+						nend = int(st) + int(5)
+						sequences = my_value[nstart:nend]
+						idgt = 'gRNAgt_' + str(nstart)
+						score_LINDELNG = round(LINDELNGcalculatescore(sequences),2)
+                                                cas9NGT[idgt] = [nstart,nend,'+',sequences,float(0.0),float(0.0),float(0.0),float(score_LINDELNG),float(0.0),str(IDs)]
+
+			for n in xrange(len(my_value)): 
+				st = my_value.find('CA',n)
+				if st == n:
+					if int(25) < int(st) < len(my_value)-int(5):
+						nstart = int(st) - int(25)
+						nend = int(st) + int(5)
+						sequences = my_value[nstart:nend]
+						idnca = 'gRNAnca_' + str(nstart)
+						score_LINDELNG = round(LINDELNGcalculatescore(sequences),2)
+                                                ncas9NGT[idnca] = [nstart,nend,'-',sequences,float(0.0),float(0.0),float(0.0),float(score_LINDELNG),float(0.0),str(IDs)]
+	
 												
 					
 			for n in xrange(len(my_value)):
@@ -414,7 +551,7 @@ def Comprehensive(fastfile):
                                                 sequences = my_value[nstart:nend]
 						idscas = 'gRNAcas_' + str(nstart)
 						score_CINDEL = round(CINDELcalculatescore(sequences),2)
-						cas12a[idscas] = [nstart,nend,'+',sequences,float(0.0),float(0.0),float(0.0),float(score_CINDEL),str(IDs)]
+						cas12a[idscas] = [nstart,nend,'+',sequences,float(0.0),float(0.0),float(0.0),float(0.0),float(score_CINDEL),str(IDs)]
 
 			for p in xrange(len(my_value)):
                                 st = my_value.find('AAA',p)
@@ -426,16 +563,16 @@ def Comprehensive(fastfile):
 						nsequences = reverseComp(sequences)
                                                 idsca = 'gRNAcas_' + str(nstart)
                                                 score_CINDEL = round(CINDELcalculatescore(sequences),2)
-                                                ncas12a[idsca] = [nstart,nend,'+',sequences,float(0.0),float(0.0),float(0.0),float(score_CINDEL),str(IDs)]
+                                                ncas12a[idsca] = [nstart,nend,'+',sequences,float(0.0),float(0.0),float(0.0),float(0.0),float(score_CINDEL),str(IDs)]
 					
 		
 		else:
 			print "length not appropriate"
 
-	aspha = dict(chain(cas9i.items(),ncas9i.items(),cas9a.items(),ncas9a.items(),cas9.items(),ncas9.items(),cas12a.items(),ncas12a.items()))
-	dyt = OrderedDict(sorted(aspha.items(), key=lambda x:x[1][4],reverse=True))
+	aspha = dict(chain(cas9i.items(),ncas9i.items(),cas9a.items(),ncas9a.items(),cas9.items(),ncas9.items(),cas9NGA.items(),ncas9NGA.items(),cas9NGC.items(),ncas9NGC.items(),cas9NGT.items(),ncas9NGT.items(),cas12a.items(),ncas12a.items()))
+	dyt = OrderedDict(sorted(aspha.items(), key=lambda x:x[1][6],reverse=True))
 	for key,value in dyt.items():
-		cas9f.write(str(value[8]) + '\t' + str(value[0]) + '\t' + str(value[1]) + '\t' + str(value[2]) + '\t' + str(value[3]) + '\t'+ str(value[4]) +  '\t' + str(value[5]) + '\t' + str(value[6]) + '\t' + str(value[7]) + '\n')
+		cas9f.write(str(value[9]) + '\t' + str(value[0]) + '\t' + str(value[1]) + '\t' + str(value[2]) + '\t' + str(value[3]) + '\t'+ str(value[4]) +  '\t' + str(value[5]) + '\t' + str(value[6]) + '\t' + str(value[7]) + '\t' + str(value[8]) +'\n')
 	cas9f.close()
 	
 		
@@ -713,6 +850,126 @@ def CGD12a(fastfile):
         cas9if.close()
 	return cas9if
 
+def CGD9NG(fastfile):
+	cas9 = {}
+	cas9i = {}
+	cas9a = {}
+	cas9NGA = {}
+	cas9NGC = {}
+	cas9NGT = {}
+	cas12a = {}
+	ncas9 = {}
+	ncas9i = {}
+	ncas9a = {}
+	ncas9NGA = {}
+	ncas9NGC = {}
+	ncas9NGT = {}
+	ncas12a = {}
+	sara = {}
+	ast = []
+	comb = {}
+	ncomb = {}
+	can = {}
+	ncan = {}
+	eff = {}
+	nff = {}
+	sff = {}
+	rff = {}
+	file1 = open(fastfile,'r')
+        file1  = file1.readlines()
+        cas9ng = open('CGD9NG.txt','wb')
+        cas9ng.write('ID' + 'Start' + '\t' + 'End' + '\t' + 'Strand' + '\t' + 'Sequence' + '\t' + 'CGD9NG'  + '\n')
+	for line in file1:
+                if line.startswith(">"):
+                        newline = line.strip('\r\n')
+                        nare = newline[1:]
+                        nare = nare.split(' ')[0]
+                        ps = nare[:-2]
+                        sara[ps] = []
+                else:
+                        newsequence = line.strip('\r\n').split('\n')
+                        for az in newsequence:
+                                ast.append(az)
+                        my_str = ''.join(map(str,ast))
+                        sara[ps] = [my_str]
+        for key,value in sara.items():
+                my_value = value[0]
+                if (int(100) <= len(my_value) <= int(10000)):
+			for n in xrange(len(my_value)): 
+				st = my_value.find('GA',n)
+				if st == n:
+					if int(25) < int(st) < len(my_value)-int(5):
+						nstart = int(st) - int(25)
+						nend = int(st) + int(5)
+						sequences = my_value[nstart:nend]
+						idga = 'gRNAga_' + str(nstart)
+						score_LINDELNG = round(LINDELNGcalculatescore(sequences),2)
+                                                cas9NGA[idga] = [nstart,nend,'+',sequences,float(score_LINDELNG),str(key)]
+
+			for n in xrange(len(my_value)): 
+				st = my_value.find('CT',n)
+				if st == n:
+					if int(25) < int(st) < len(my_value)-int(5):
+						nstart = int(st) - int(25)
+						nend = int(st) + int(5)
+						sequences = my_value[nstart:nend]
+						idct = 'gRNAct_' + str(nstart)
+						score_LINDELNG = round(LINDELNGcalculatescore(sequences),2)
+                                                ncas9NGA[idct] = [nstart,nend,'-',sequences,float(score_LINDELNG),str(key)]
+		
+			
+
+			
+			for n in xrange(len(my_value)): 
+				st = my_value.find('GC',n)
+				if st == n:
+					if int(25) < int(st) < len(my_value)-int(5):
+						nstart = int(st) - int(25)
+						nend = int(st) + int(5)
+						sequences = my_value[nstart:nend]
+						idgc = 'gRNAgc_' + str(nstart)
+						score_LINDELNG = round(LINDELNGcalculatescore(sequences),2)
+                                                cas9NGC[idgc] = [nstart,nend,'+',sequences,float(score_LINDELNG),str(key)]
+
+			for n in xrange(len(my_value)): 
+				st = my_value.find('CG',n)
+				if st == n:
+					if int(25) < int(st) < len(my_value)-int(5):
+						nstart = int(st) - int(25)
+						nend = int(st) + int(5)
+						sequences = my_value[nstart:nend]
+						idcg = 'gRNAcg_' + str(nstart)
+						score_LINDELNG = round(LINDELNGcalculatescore(sequences),2)
+                                                ncas9NGC[idcg] = [nstart,nend,'-',sequences,float(score_LINDELNG),str(key)]
+
+			for n in xrange(len(my_value)): 
+				st = my_value.find('GT',n)
+				if st == n:
+					if int(25) < int(st) < len(my_value)-int(5):
+						nstart = int(st) - int(25)
+						nend = int(st) + int(5)
+						sequences = my_value[nstart:nend]
+						idgt = 'gRNAgt_' + str(nstart)
+						score_LINDELNG = round(LINDELNGcalculatescore(sequences),2)
+                                                cas9NGT[idgt] = [nstart,nend,'+',sequences,float(score_LINDELNG),str(key)]
+
+			for n in xrange(len(my_value)): 
+				st = my_value.find('CA',n)
+				if st == n:
+					if int(25) < int(st) < len(my_value)-int(5):
+						nstart = int(st) - int(25)
+						nend = int(st) + int(5)
+						sequences = my_value[nstart:nend]
+						idnca = 'gRNAnca_' + str(nstart)
+						score_LINDELNG = round(LINDELNGcalculatescore(sequences),2)
+                                                ncas9NGT[idnca] = [nstart,nend,'-',sequences,float(score_LINDELNG),str(key)]
+	newcasi = dict(chain(cas9NGA.items(),ncas9NGA.items(),cas9NGC.items(),ncas9NGC.items(),cas9NGT.items(),ncas9NGT.items()))
+        syt = OrderedDict(sorted(newcasi.items(), key=lambda x:x[1][4],reverse=True))
+        for key,value in syt.items():
+                cas9ng.write(str(value[5]) + '\t' + str(value[0]) + '\t' + str(value[1]) + '\t' + str(value[2]) + '\t' + str(value[3]) + '\t' + str(value[4]) + '\n')
+        cas9ng.close()
+	return cas9ng	
+
 def helps(ane):
 
 	parser = argparse.ArgumentParser(description = 'working with CGD')
@@ -726,7 +983,7 @@ def helps(ane):
 
 
 	
-func_arg = {"-a": Comprehensive, "-b": CGDi, "-c": CGDa, "-d": CGD9, "-e": CGD12a, "-h": helps}
+func_arg = {"-a": Comprehensive, "-b": CGDi, "-c": CGDa, "-d": CGD9, "-e": CGD12a, "-f": CGD9NG, "-h": helps}
 
 if __name__ == "__main__":
 	func_arg[sys.argv[1]](sys.argv[2])
