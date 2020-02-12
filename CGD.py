@@ -984,6 +984,7 @@ def helps(ane):
 	parser.add_argument('-c',metavar='\b',help = 'The option generates CRISPRa score using CGDa function')
 	parser.add_argument('-d',metavar='\b',help = 'The option generates CRISPR-Cas9 score using CGD9 function')
 	parser.add_argument('-e',metavar='\b',help = 'The option generates CRISPR-Cas12a score using CGD12a function')
+	parser.add_argument('-f',metavar='\b',help = 'The option generates CRISPR-Cas9 non canonical score using CGD9NG function')
 	args = parser.parse_args()
 	return args
 
