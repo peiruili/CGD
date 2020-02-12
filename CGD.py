@@ -485,13 +485,14 @@ def Comprehensive(fastfile):
 			for n in xrange(len(my_value)): 
 				st = my_value.find('CT',n)
 				if st == n:
-					if int(25) < int(st) < len(my_value)-int(5):
-						nstart = int(st) - int(25)
-						nend = int(st) + int(5)
+					if int(3) < int(st) < len(my_value)-int(27):
+						nstart = int(st) - int(3)
+						nend = int(st) + int(27)
 						sequences = my_value[nstart:nend]
+						nsequences = reverseComp(sequences)
 						idct = 'gRNAct_' + str(nstart)
-						score_LINDELNG = round(LINDELNGcalculatescore(sequences),2)
-                                                ncas9NGA[idct] = [nstart,nend,'-',sequences,float(0.0),float(0.0),float(0.0),float(score_LINDELNG),float(0.0),str(IDs)]
+						score_LINDELNG = round(LINDELNGcalculatescore(nsequences),2)
+                                                ncas9NGA[idct] = [nstart,nend,'-',nsequences,float(0.0),float(0.0),float(0.0),float(score_LINDELNG),float(0.0),str(IDs)]
 		
 			
 
@@ -510,13 +511,14 @@ def Comprehensive(fastfile):
 			for n in xrange(len(my_value)): 
 				st = my_value.find('CG',n)
 				if st == n:
-					if int(25) < int(st) < len(my_value)-int(5):
-						nstart = int(st) - int(25)
-						nend = int(st) + int(5)
+					if int(3) < int(st) < len(my_value)-int(27):
+						nstart = int(st) - int(3)
+						nend = int(st) + int(27)
 						sequences = my_value[nstart:nend]
+						nsequences = reverseComp(sequences)
 						idcg = 'gRNAcg_' + str(nstart)
-						score_LINDELNG = round(LINDELNGcalculatescore(sequences),2)
-                                                ncas9NGC[idcg] = [nstart,nend,'-',sequences,float(0.0),float(0.0),float(0.0),float(score_LINDELNG),float(0.0),str(IDs)]
+						score_LINDELNG = round(LINDELNGcalculatescore(nsequences),2)
+                                                ncas9NGC[idcg] = [nstart,nend,'-',nsequences,float(0.0),float(0.0),float(0.0),float(score_LINDELNG),float(0.0),str(IDs)]
 
 			for n in xrange(len(my_value)): 
 				st = my_value.find('GT',n)
@@ -532,13 +534,14 @@ def Comprehensive(fastfile):
 			for n in xrange(len(my_value)): 
 				st = my_value.find('CA',n)
 				if st == n:
-					if int(25) < int(st) < len(my_value)-int(5):
-						nstart = int(st) - int(25)
-						nend = int(st) + int(5)
+					if int(3) < int(st) < len(my_value)-int(27):
+						nstart = int(st) - int(3)
+						nend = int(st) + int(27)
 						sequences = my_value[nstart:nend]
+						nsequences = reverseComp(sequences)
 						idnca = 'gRNAnca_' + str(nstart)
 						score_LINDELNG = round(LINDELNGcalculatescore(sequences),2)
-                                                ncas9NGT[idnca] = [nstart,nend,'-',sequences,float(0.0),float(0.0),float(0.0),float(score_LINDELNG),float(0.0),str(IDs)]
+                                                ncas9NGT[idnca] = [nstart,nend,'-',nsequences,float(0.0),float(0.0),float(0.0),float(score_LINDELNG),float(0.0),str(IDs)]
 	
 												
 					
