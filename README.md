@@ -1,7 +1,7 @@
 # CGD
 [![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://travis-ci.org/joemccann/dillinger)
 
-CGD is python based on-target scoring method for CRISPRi, CRISPRa, Cas9 and Cas12a sequences.They are consortium of scores such as CGDi, CGDa, CGD9 and CGD12a, which are based on ENLOR(ELastic Net Logistic Regression) weights. 
+CGD is python based on-target scoring method for CRISPRi, CRISPRa, Cas9, Cas9 (non-canonical) and Cas12a sequences.They are consortium of scores such as CGDi, CGDa, CGD9, CGD9NG and CGD12a, which are based on ENLOR(ELastic Net Logistic Regression) weights. 
 
 ### Requirements
 
@@ -20,7 +20,7 @@ The rest packages could be installed by using ```pip```
 To make our source code user friendly we have provided help function which could be implemented in following way
 ```
 python CGD.py -h help
-usage: CGD.py [-h] [-a] [-b] [-c] [-d] [-e]
+usage: CGD.py [-h] [-a] [-b] [-c] [-d] [-e] [-f]
 
 working with CGD
 
@@ -126,9 +126,6 @@ XM_0302449	1341	1371	+	GAGCACGAAGGAAGACACCCAGGAGGAGCC	0.99
 XM_0302449	784	814	-	GAGATGCTGACTCCAGTAAAGAAGGGAGAT	0.98
 XM_0302449	834	864	-	AGACATGGCGTCGGAAGACTCAGACGAGTC	0.8
 ```
-
-
-
 
 License
 ----
