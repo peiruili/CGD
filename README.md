@@ -38,7 +38,7 @@ optional arguments:
 CGD python file is executed on fasta file
 - The input file should be in fasta format 
 - The length of fasta file should be betweem 100nt and 10000nt
-- The scores are generated with range [0,1], where the gRNA sequences with score greater than 0.5 are considered efficient.
+- The scores are generated with range [0,1], where the gRNA sequences with score lesser than 0.5 are considered efficient.
 - The output file are shown in tabular format which compromises of ID, Start,End, Strand, 30 or 34nt sequence (based on Cas system)   and on-target score 
 ``` python
     python CGD.py -a input.fa (Comprehensive Score)
