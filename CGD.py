@@ -404,7 +404,7 @@ def Comprehensive(fastfile):
 	file1 = open(fastfile,'r')
 	file1  = file1.readlines()
 	cas9f = open('CGD.txt','wb')
-	cas9f.write('ID' + '\t' + 'Start' + '\t' + 'End' + '\t' + 'Strand' + '\t' + 'Sequence' + '\t' + 'CGDi' + '\t' + 'CGDa' + '\t' + 'CGD9' + '\t' + 'CGDNGR' + '\t' + 'CGD12a' +'\n')
+	cas9f.write('ID' + '\t' + 'Start' + '\t' + 'End' + '\t' + 'Strand' + '\t' + 'Sequence' + '\t' + 'CGDi' + '\t' + 'CGDa' + '\t' + 'CGD9' + '\t' + 'CGDNG' + '\t' + 'CGD12a' +'\n')
 	for line in file1:
 		if line.startswith(">"):
 			newline = line.strip('\r\n')
