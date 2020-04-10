@@ -3,6 +3,10 @@
 
 CGD is python based on-target scoring method for CRISPRi, CRISPRa, Cas9, Cas9 (non-canonical) and Cas12a sequences.They are consortium of scores such as CGDi, CGDa, CGD9, CGD9NG and CGD12a, which are based on ENLOR(ELastic Net Logistic Regression) weights. 
 
+## Website
+
+The authors can access our website for CGD at http://big.hanyang.ac.kr:2195/CGD. The webiste provide GUI for the users to get on-target score for gRNA corresponding to Cas9 (canonical and non-canonical), CRISPRi, CRISPRa and Cas12a
+
 ### Requirements
 
   - Python 2.7 or above
